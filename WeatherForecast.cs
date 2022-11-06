@@ -2,6 +2,7 @@ namespace dotnet_rpg;
 
 public class WeatherForecast
 {
+    //WeatherForecast
     public DateTime Date { get; set; }
 
     public int TemperatureC { get; set; }
