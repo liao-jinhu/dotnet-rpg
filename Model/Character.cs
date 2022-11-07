@@ -16,6 +16,9 @@ namespace dotnet_rpg.Model
         public User? User{get;set;}
         //public Date DateCreate{get;set;}
 
+        public Weapon Weapon{get;set;}
+
+        public List<Skill> Skills{get;set;}
 
     }
 }
