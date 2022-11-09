@@ -33,7 +33,6 @@ namespace dotnet_rpg.Services.WeaponService
                     response.Success = false;
                     response.Message = "Charactor not found.";
                     return response;
-
                 }
 
                 Weapon weapon = new Weapon(){

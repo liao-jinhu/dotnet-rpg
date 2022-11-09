@@ -130,19 +130,6 @@ namespace dotnet_rpg.Services.FightService
             return response;
         }
 
-        private static int DoSkillAttack(Character? attacker, Character? opponent, Skill? Skill)
-        {
-            int damage = Skill.Damage + (new Random().Next(attacker.Intelligence));
-            damage -= new Random().Next(opponent.Defeats);
-
-            if (damage > 0)
-            {
-                opponent.HitPoints -= damage;
-            }
-
-            return damage;
-        }
-
         public async Task<ServiceResponse<AttackResultDto>> WeaponAttack(WeaponAttackDto request)
         {
             var response = new ServiceResponse<AttackResultDto>();
@@ -178,6 +165,21 @@ namespace dotnet_rpg.Services.FightService
             return response;
         }
 
+        public async Task<ServiceResponse<List<HighscoreDto>>> GetHighscore()
+        {
+            var characters = await _context.Characters
+            .Where(c => c.Fights > 0)
+            .OrderByDescending(c => c.Victories)
+            .ThenBy(c => c.Defeats)
+            .ToListAsync();
+
+            var response = new ServiceResponse<List<HighscoreDto>>
+            {
+                Data = characters.Select(c => _mapper.Map<HighscoreDto>(c)).ToList()
+            };
+            return response;
+        }
+
         private static int DoWeaponAttack(Character? attacker, Character? opponent)
         {
             int damage = attacker.Weapon.Damage + (new Random().Next(attacker.Strength));
@@ -190,18 +192,20 @@ namespace dotnet_rpg.Services.FightService
             return damage;
         }
 
-        public async Task<ServiceResponse<List<HighscoreDto>>> GetHighscore()
+        private static int DoSkillAttack(Character? attacker, Character? opponent, Skill? Skill)
         {
-           var characters = await _context.Characters
-           .Where(c =>c.Fights >0)
-           .OrderByDescending(c => c.Victories)
-           .ThenBy(c =>c.Defeats)
-           .ToListAsync();
+            int damage = Skill.Damage + (new Random().Next(attacker.Intelligence));
+            damage -= new Random().Next(opponent.Defeats);
 
-           var response = new ServiceResponse<List<HighscoreDto>>{
-               Data = characters.Select(c => _mapper.Map<HighscoreDto>(c)).ToList()
-           };
-           return response;
+            if (damage > 0)
+            {
+                opponent.HitPoints -= damage;
+            }
+
+            return damage;
         }
+
+
+
     }
 }
