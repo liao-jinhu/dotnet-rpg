@@ -15,7 +15,6 @@ namespace dotnet_rpg.Services.FightService
         {
             _mapper = mapper;
             _context = context;
-
         }
 
         public async Task<ServiceResponse<FightResultDto>> Fight(FightRequestDto request)
@@ -46,7 +45,6 @@ namespace dotnet_rpg.Services.FightService
                         {
                             attackUsed = attacker.Weapon.Name;
                             damage = DoWeaponAttack(attacker, opponent);
-
                         }
                         else
                         {
@@ -74,13 +72,11 @@ namespace dotnet_rpg.Services.FightService
                     c.HitPoints = 100;
                 });
                 await _context.SaveChangesAsync();
-
             }
             catch (Exception ex)
             {
                 response.Success = false;
                 response.Message = ex.Message;
-
             }
             return response;
         }

@@ -30,6 +30,7 @@ namespace dotnet_rpg.Services.CharacterService
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
         .FindFirstValue(ClaimTypes.NameIdentifier));
 
+        //添加
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
@@ -44,6 +45,7 @@ namespace dotnet_rpg.Services.CharacterService
             return serviceResponse;
         }
 
+        //查询所有
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
             // return new ServiceResponse<List<GetCharacterDto>>
@@ -53,11 +55,14 @@ namespace dotnet_rpg.Services.CharacterService
             var response = new ServiceResponse<List<GetCharacterDto>>();
             var dbCharacters = await _context.Characters
             .Where(c => c.User.Id == GetUserId())
+            .Include(c => c.Weapon)
+            .Include(c => c.Skills)
             .ToListAsync();
             response.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             return response;
         }
 
+        //ID查询
         public async Task<ServiceResponse<GetCharacterDto>> GetAllCharacterById(int id)
         {
             // var serviceResponse = new ServiceResponse<GetCharacterDto>();
@@ -73,12 +78,12 @@ namespace dotnet_rpg.Services.CharacterService
             return serviceResponse;
         }
 
+        //更新
         public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updateCharacter)
         {
             ServiceResponse<GetCharacterDto> response = new ServiceResponse<GetCharacterDto>();
             try
             {
-                //Character character = characters.FirstOrDefault(c => c.Id == updateCharacter.Id);
                 var character = await _context.Characters
                 .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id);
 
@@ -90,16 +95,13 @@ namespace dotnet_rpg.Services.CharacterService
                     // character.Strength = updateCharacter.Strength;
                     // character.Defense = updateCharacter.Defense;
                     // character.Class = updateCharacter.Class;
-
                     await _context.SaveChangesAsync();
-
                     response.Data = _mapper.Map<GetCharacterDto>(character);
-
                 }
                 else
                 {
                     response.Success = false;
-                    response.Message = "Charactor not found.";
+                    response.Message = "Character not found.";
                 }
 
             }
@@ -160,8 +162,8 @@ namespace dotnet_rpg.Services.CharacterService
                     return response;
 
                 }
-                var skill = await _context.Skills.FirstOrDefaultAsync(s =>s.Id == newCharacterSkill.SkillId);
-                 if (skill == null)
+                var skill = await _context.Skills.FirstOrDefaultAsync(s => s.Id == newCharacterSkill.SkillId);
+                if (skill == null)
                 {
                     response.Success = false;
                     response.Message = "Skill not found.";
@@ -171,8 +173,6 @@ namespace dotnet_rpg.Services.CharacterService
                 character.Skills.Add(skill);
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<GetCharacterDto>(character);
-
-
             }
             catch (Exception ex)
             {

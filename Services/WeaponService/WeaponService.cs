@@ -31,7 +31,7 @@ namespace dotnet_rpg.Services.WeaponService
                 if (character == null)
                 {
                     response.Success = false;
-                    response.Message = "Charactor not found.";
+                    response.Message = "Character not found.";
                     return response;
                 }
 
@@ -46,7 +46,6 @@ namespace dotnet_rpg.Services.WeaponService
             }
             catch (Exception ex)
             {
-
                 response.Success = false;
                 response.Message = ex.Message;
             }

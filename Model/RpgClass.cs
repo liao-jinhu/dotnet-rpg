@@ -6,6 +6,6 @@ namespace dotnet_rpg.Model
     {
         Knight = 1,
         Mage = 2,
-        Cleric =3
+        Cleric = 3
     }
 }
