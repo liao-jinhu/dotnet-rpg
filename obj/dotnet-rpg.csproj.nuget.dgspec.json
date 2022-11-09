@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\code\\code2022\\Practise\\dotnet-rpg\\dotnet-rpg.csproj": {}
+    "F:\\code\\Practise\\dotnet-rpg\\dotnet-rpg.csproj": {}
   },
   "projects": {
-    "D:\\code\\code2022\\Practise\\dotnet-rpg\\dotnet-rpg.csproj": {
+    "F:\\code\\Practise\\dotnet-rpg\\dotnet-rpg.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\code\\code2022\\Practise\\dotnet-rpg\\dotnet-rpg.csproj",
+        "projectUniqueName": "F:\\code\\Practise\\dotnet-rpg\\dotnet-rpg.csproj",
         "projectName": "dotnet-rpg",
-        "projectPath": "D:\\code\\code2022\\Practise\\dotnet-rpg\\dotnet-rpg.csproj",
-        "packagesPath": "C:\\Users\\ljh20\\.nuget\\packages\\",
-        "outputPath": "D:\\code\\code2022\\Practise\\dotnet-rpg\\obj\\",
+        "projectPath": "F:\\code\\Practise\\dotnet-rpg\\dotnet-rpg.csproj",
+        "packagesPath": "C:\\Users\\MISLJH\\.nuget\\packages\\",
+        "outputPath": "F:\\code\\Practise\\dotnet-rpg\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\software\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "E:\\software\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ljh20\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MISLJH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
